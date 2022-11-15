@@ -6,6 +6,8 @@ public class TicTacToe {
     private int cpuCount = 0;
     private int pCount = 1;
     public int pInput = 0;
+    private int pTotal = 0;
+    private int cpuTotal = 0;
     private boolean tLC = true;
     private boolean tC = true;
     private boolean tRC = true;
@@ -20,6 +22,7 @@ public class TicTacToe {
 
 
     public TicTacToe(String choice){
+        cpuTotal = 0;
         int pcheck = 1;
         play = true;
         if (choice.contains("c")){
@@ -28,6 +31,11 @@ public class TicTacToe {
                 clown();
                 cpuCount++;
                 tSpot--;
+                if (winCondiiton(tSpot) == -1){
+                    tSpot = 0;
+                    System.out.println("WC: "+winCondiiton(cpuTotal));
+                }
+
                 }
                 if (tSpot != 0){
                 if (cpuCount >= pCount){
@@ -38,8 +46,17 @@ public class TicTacToe {
                     if (spot(pInput)){
                         pcheck++;
                         pCount++;
-            }}}}}System.out.println("It's a draw!");
-
+                        pTotal += pInput;
+                        if (winCondiiton(tSpot) == 1){
+                            tSpot = 0;
+                            winCondiiton(pTotal);
+                        }
+            }}}}
+                System.out.println("Spot: "+tSpot);
+                if (winCondiiton(cpuTotal) != -1 && winCondiiton(pTotal) != 1){
+                if (winCondiiton(tSpot)==0){
+                    System.out.println("It's a draw!");}}
+            }
     }
     }
     // print statements = where display code should be
@@ -51,8 +68,8 @@ public class TicTacToe {
             if (spot(outcome)) {
                 check++;
             }
-
     }
+        cpuTotal += outcome;
     System.out.println(outcome);}
 
     private int mald(){
@@ -80,6 +97,50 @@ public class TicTacToe {
         if (check == 1) {
 
             return true;}
+        else return false;
+    }
+    private int winCondiiton(int number){
+        if (winCChecker()){
+        if (number < 5 && number != 0){
+        if (pTotal%6 == 0 || pTotal == 15){
+            System.out.println("Player wins");
+            return 1;
+        }
+        if (cpuTotal%6 == 0 || cpuTotal == 15){
+            System.out.println("Computer wins");
+            return -1;
+        }
+    }
+        if (number == 0){
+            return 0;
+        }}
+        return 5;
+    }
+    public boolean winCChecker(){
+        if (!(tLC || tC || tRC)){
+            return true;
+        }
+        else if (!(mL||mC||mR)){
+            return true;
+        }
+        else if (!(bLC||bC||bRC)){
+            return true;
+        }
+        else if (!(tLC||mL||bLC)){
+            return true;
+        }
+        else if (!(tC||mC||mL)){
+            return true;
+        }
+        else if (!(tRC||mR||bRC)){
+            return true;
+        }
+        else if(!(tRC||mC||bLC)){
+            return true;
+        }
+        else if (!(tLC||mC||bRC)){
+            return true;
+        }
         else return false;
     }
     private void getOutcome(){
