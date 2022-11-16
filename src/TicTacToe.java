@@ -1,13 +1,12 @@
 import java.util.Scanner;
 public class TicTacToe {
-    private boolean play = false;
-    private int ws = 0;
+    public int tSpot;
     private int outcome = 0;
     private int cpuCount = 0;
     private int pCount = 1;
     public int pInput = 0;
-    private int pTotal = 0;
-    private int cpuTotal = 0;
+    public int pTotal = 0;
+    public int cpuTotal = 0;
     private boolean tLC = true;
     private boolean tC = true;
     private boolean tRC = true;
@@ -17,6 +16,11 @@ public class TicTacToe {
     private boolean bLC = true;
     private boolean bC = true;
     private boolean bRC = true;
+    private String[][] grid = {
+            {" "," "," ",""},
+            {" "," "," ",""},
+            {" "," "," ",""}
+    };
 
     Scanner s = new Scanner(System.in);
 
@@ -24,18 +28,13 @@ public class TicTacToe {
     public TicTacToe(String choice){
         cpuTotal = 0;
         int pcheck = 1;
-        play = true;
         if (choice.contains("c")){
-            for (int tSpot = 9; tSpot> 0;tSpot--){
+            for (tSpot = 1; tSpot> 0;tSpot--){
                 if (cpuCount < pCount){
-                clown();
-                cpuCount++;
-                tSpot--;
-                if (winCondiiton(tSpot) == -1){
+                System.out.println(clown());
+                if (winCondition(tSpot) == -1){
                     tSpot = 0;
-                    System.out.println("WC: "+winCondiiton(cpuTotal));
                 }
-
                 }
                 if (tSpot != 0){
                 if (cpuCount >= pCount){
@@ -47,20 +46,31 @@ public class TicTacToe {
                         pcheck++;
                         pCount++;
                         pTotal += pInput;
-                        if (winCondiiton(tSpot) == 1){
+                        if (winCondition(tSpot) == 1){
                             tSpot = 0;
-                            winCondiiton(pTotal);
+                            winCondition(pTotal);
                         }
-            }}}}
-                System.out.println("Spot: "+tSpot);
-                if (winCondiiton(cpuTotal) != -1 && winCondiiton(pTotal) != 1){
-                if (winCondiiton(tSpot)==0){
-                    System.out.println("It's a draw!");}}
+                    }}}}}}
+    }
+    public String displayGrid(){
+        String s = "_____________\n";
+        for (int r = 0;r<3;r++){
+            for (int c = 0; c < 4;c++){
+                s+= "|" + grid[r][c];
+                if (c < 3) {
+                    s += "_" + grid[r][c];
+                }
             }
+            s+="\n";
+
+        }
+        s+= "-------------";
+        return s;
     }
+    public void start(){
+
     }
-    // print statements = where display code should be
-    public void clown(){
+    public int clown(){
         int check = 0;
         getOutcome();
         while (!spot(outcome) && check == 0){
@@ -70,7 +80,9 @@ public class TicTacToe {
             }
     }
         cpuTotal += outcome;
-    System.out.println(outcome);}
+        cpuCount++;
+        tSpot--;
+    return outcome;}
 
     private int mald(){
         outcome = 5;
@@ -99,7 +111,7 @@ public class TicTacToe {
             return true;}
         else return false;
     }
-    private int winCondiiton(int number){
+    public int winCondition(int number){
         if (winCChecker()){
         if (number < 5 && number != 0){
         if (pTotal%6 == 0 || pTotal == 15){
@@ -145,6 +157,10 @@ public class TicTacToe {
     }
     private void getOutcome(){
         outcome = (int)((Math.random()*9)+1);
+    }
+    public String pInput(String input){
+        return input;
+
     }
 
 }

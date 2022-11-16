@@ -7,7 +7,24 @@ public class TicTacToeRunner {
                 + "Please type in either \"clown\" or \"mald\" to choose the difficulty you want.");
         String choice = s.nextLine();
 
+
         TicTacToe game1 = new TicTacToe(choice);
+        System.out.println(game1.displayGrid());
+
+
+
+
+        if (game1.winCondition(game1.cpuTotal)==-1){
+            System.out.println("You Lost!");
+        }
+        else if (game1.winCondition(game1.pTotal)==1){
+            System.out.println("You Won!");
+        }
+        else if (game1.winCondition(game1.cpuTotal)!=1 && game1.winCondition(game1.pTotal)!=1){
+        if (game1.winCondition(game1.tSpot)==0){
+            System.out.println("It's a Draw!");
+        }
+        }
 
     }
 }
