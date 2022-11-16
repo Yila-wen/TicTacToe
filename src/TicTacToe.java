@@ -62,6 +62,7 @@ public class TicTacToe {
                 }
             }
             s+="\n";
+            System.out.println("remove this");
 
         }
         s+= "-------------";

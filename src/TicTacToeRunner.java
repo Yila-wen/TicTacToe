@@ -10,6 +10,7 @@ public class TicTacToeRunner {
 
         TicTacToe game1 = new TicTacToe(choice);
         System.out.println(game1.displayGrid());
+        System.out.println("remove this");
 
 
 
