@@ -6,11 +6,16 @@ public class TicTacToeRunner {
         System.out.println("Welcome to TicTacToe, if you don't know the rules search it up."+ "\n"
                 + "Please type in either \"clown\" or \"mald\" to choose the difficulty you want.");
         String choice = s.nextLine();
+        if (choice.contains("c")) {
 
 
-        TicTacToe game1 = new TicTacToe(choice);
-        System.out.println(game1.displayGrid());
-        System.out.println("remove this");
+            TicTacToe game1 = new TicTacToe(choice);
+            System.out.println(game1.displayGrid());
+            System.out.println("Please input your choice");
+            int pInput = s.nextInt();
+            game1.pInputChecker(pInput);
+            System.out.println(game1.clown());
+
 
 
 
@@ -28,4 +33,4 @@ public class TicTacToeRunner {
         }
 
     }
-}
+}}

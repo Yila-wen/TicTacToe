@@ -7,6 +7,7 @@ public class TicTacToe {
     public int pInput = 0;
     public int pTotal = 0;
     public int cpuTotal = 0;
+    private boolean play = false;
     private boolean tLC = true;
     private boolean tC = true;
     private boolean tRC = true;
@@ -27,31 +28,11 @@ public class TicTacToe {
 
     public TicTacToe(String choice){
         cpuTotal = 0;
-        int pcheck = 1;
+        play = true;
         if (choice.contains("c")){
-            for (tSpot = 1; tSpot> 0;tSpot--){
-                if (cpuCount < pCount){
-                System.out.println(clown());
-                if (winCondition(tSpot) == -1){
-                    tSpot = 0;
-                }
-                }
-                if (tSpot != 0){
-                if (cpuCount >= pCount){
-                    pcheck--;
-                while (!spot(outcome) && pcheck == 0){
-                    System.out.println("please input your choice");
-                    pInput = s.nextInt();
-                    if (spot(pInput)){
-                        pcheck++;
-                        pCount++;
-                        pTotal += pInput;
-                        if (winCondition(tSpot) == 1){
-                            tSpot = 0;
-                            winCondition(pTotal);
-                        }
-                    }}}}}}
-    }
+
+            }
+        }
     public String displayGrid(){
         String s = "_____________\n";
         for (int r = 0;r<3;r++){
@@ -62,7 +43,6 @@ public class TicTacToe {
                 }
             }
             s+="\n";
-            System.out.println("remove this");
 
         }
         s+= "-------------";
@@ -78,6 +58,10 @@ public class TicTacToe {
             getOutcome();
             if (spot(outcome)) {
                 check++;
+            }
+            if (winCondition(tSpot) == -1){
+                tSpot = 0;
+                play = false;
             }
     }
         cpuTotal += outcome;
@@ -156,11 +140,29 @@ public class TicTacToe {
         }
         else return false;
     }
+
+    public void pInputChecker(int pInput){
+        int pcheck =0;
+        if (play){
+        while (!spot(outcome) && pcheck == 0){
+            if (spot(pInput)){
+                pcheck++;
+                pCount++;
+                pTotal += pInput;
+                if (winCondition(tSpot) == 1){
+                    tSpot = 0;
+                    winCondition(pTotal);
+                    play = false;
+                }
+            }
+        }
+    }}
+
     private void getOutcome(){
         outcome = (int)((Math.random()*9)+1);
     }
-    public String pInput(String input){
-        return input;
+    public String pInput(){
+        return "Please input your choice.";
 
     }
 
