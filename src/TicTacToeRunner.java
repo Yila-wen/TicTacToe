@@ -37,6 +37,7 @@ public class TicTacToeRunner {
             System.out.println("Please choose a box");
             int pInput = s.nextInt();
 
+
                 game1.pInputChecker(pInput,preference);
             System.out.println(game1.displayGrid());
                 if (game1.winCondition().equals(preference)){
@@ -52,8 +53,6 @@ public class TicTacToeRunner {
             game1.clown(clownPref);
 
     }
-            System.out.println("Would you like to play again?");
-            answer = s.nextLine();
 
         }
 

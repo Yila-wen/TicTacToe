@@ -72,28 +72,17 @@ public class TicTacToe {
         else column = (outcome%3)-1;
     clownGrid(row,column,symbol);}
 
-    private int mald(){
-        outcome = 5;
-        if (spot(outcome)) return outcome;
-        outcome = (int)((Math.random()*4)+1);
-        if (outcome == 2)outcome = 3;
-        else if (outcome == 3)outcome = 7;
-        else if (outcome == 4)outcome = 9;
-        if (spot(outcome)) return outcome;
-        return 0;
-    }
-
     private boolean spot ( int spotnum ) {
         int check = 0;
-        if (spotnum == 1 && tLC){ tLC = false; check++;}
-        if (spotnum == 2 && tC){ tC = false; check++;}
-        if (spotnum == 3 && tRC){ tRC = false; check++;}
-        if (spotnum == 4 && mL){ mL = false; check++;}
-        if (spotnum == 5 && mC){ mC = false; check++;}
-        if (spotnum == 6 && mR){ mR = false; check++;}
-        if (spotnum == 7 && bLC){ bLC = false; check++;}
-        if (spotnum == 8 && bC){ bC = false; check++;}
-        if (spotnum == 9 && bRC){ bRC = false; check++;}
+        if (spotnum == 1 && tLC==true){ tLC = false; check++;}
+        if (spotnum == 2 && tC==true){ tC = false; check++;}
+        if (spotnum == 3 && tRC==true){ tRC = false; check++;}
+        if (spotnum == 4 && mL==true){ mL = false; check++;}
+        if (spotnum == 5 && mC==true){ mC = false; check++;}
+        if (spotnum == 6 && mR==true){ mR = false; check++;}
+        if (spotnum == 7 && bLC==true){ bLC = false; check++;}
+        if (spotnum == 8 && bC==true){ bC = false; check++;}
+        if (spotnum == 9 && bRC==true){ bRC = false; check++;}
         if (check == 1) {
             tSpot--;
             return true;}
@@ -136,7 +125,8 @@ public class TicTacToe {
         int column = 0;
         int row = 0;
         if (play){
-            while (!spot(pInput) && pcheck == 0){
+
+            while (pcheck == 0){
                 if (spot(pInput)){
                     pcheck++;
                     pTotal += pInput;
