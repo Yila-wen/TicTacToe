@@ -1,8 +1,12 @@
+/**
+ * The TicTacToe class represents the Tic-Tac-Toe game.
+ * A Tic-Tac-Toe game is a game thus is either in play or not in play, you can either win, lose, or draw(no one cares about this)
+ * it also has a set grid of 3 by 3
+ *
+ */
 public class TicTacToe {
     public int tSpot;
     private int outcome = 0;
-    public int pTotal = 0;
-    public int cpuTotal;
     private int wins = 0;
     private int loses = 0;
     public boolean play = false;
@@ -20,12 +24,27 @@ public class TicTacToe {
             {" "," "," ",""},
             {" "," "," ",""}
     };
+
+    /**
+     * Constructor for the TicTacToe Class only creates a new instance of TicTacToe
+     */
     public TicTacToe(){
         }
+
+    /**
+     * The setPlay method is a method that will set the preconditions before a game begins
+     * Such as setting the # of valid spots to the max(9) and play to true
+     */
     public void setPlay(){
         tSpot = 9;
         play = true;
         }
+
+    /**
+     * The displayGrid method creates a grid that can be shown to the user using a String
+     *
+     * @return returns a grid with intended information on it
+     */
 
     public String displayGrid(){
         String s = "_______\n";
@@ -42,12 +61,35 @@ public class TicTacToe {
         s+= "-------";
         return s;
     }
+
+    /**
+     * The clownGrid method allows the cpu to place their choice onto the grid
+     *
+     * @param row represents the row
+     * @param column represents th column
+     * @param input represents the symbol being put onto the grid
+     */
     public void clownGrid(int row,int column,String input){
         grid[row][column] = input;
     }
+
+    /**
+     * The playerGrid methods allows the player to place their choice onto the grid
+     *
+     * @param row represents the row
+     * @param column represents th column
+     * @param input represents the symbol being put onto the grid
+     */
     public void playerGrid(int row,int column,String input){
         grid[row][column] = input;
     }
+
+    /**
+     * The clown method is a difficulty for the TicTacToe class and dictates how the cpu
+     * choice will be made.
+     *
+     * @param symbol represents the symbol that will be put onto the grid
+     */
     public void clown(String symbol){
         int column = 0;
         int row = 0;
@@ -59,17 +101,23 @@ public class TicTacToe {
                 check++;
             }
         }
-        cpuTotal += outcome;
         if (outcome%3==0)row = (outcome/3)-1;
         else row = (outcome/3);
         if (outcome%3==0) column = 2;
         else column = (outcome%3)-1;
-    clownGrid(row,column,symbol);
+        clownGrid(row,column,symbol);
         if (winCondition().equals(symbol)){
             tSpot = 0;
             loses ++;
             play = false;
         }}
+
+    /**
+     * The spot method checks whether a certain spot is occupied or not
+     *
+     * @param spotnum represents the numbered spot that will be checked
+     * @return either false or true depending on if the spot was occupied or not
+     */
 
     private boolean spot ( int spotnum ) {
         int check = 0;
@@ -87,6 +135,13 @@ public class TicTacToe {
             return true;}
         else return false;
     }
+
+    /**
+     * The winCondition class checks if the number of spots available are 4 or less else ends
+     * if the above is met it checks if 1 of the 8 possible win scenarios in Tic-Tac-Toe has been met
+     * then returns the corresponding symbol
+     * @return nothing if the precondition is not met and if met either X or O is returned depending on which won
+     */
     public String winCondition(){
         if (tSpot<=4){
                 String c1 = grid[0][0]+grid[0][1]+grid[0][2];
@@ -119,6 +174,15 @@ public class TicTacToe {
         return "";
     }
 
+    /**
+     * The pInputChecker method checks if the player input's spot is occupied or not
+     * if occupied it will not run
+     * if not occupied it will place the symbol into the spot
+     *
+     * @param pInput represents the player's choice
+     * @param preference represents the player's symbol
+     */
+
     public void pInputChecker(int pInput,String preference){
         int pcheck =0;
         int column = 0;
@@ -128,7 +192,6 @@ public class TicTacToe {
             while (pcheck == 0){
                 if (spot(pInput)){
                     pcheck++;
-                    pTotal += pInput;
                     if (pInput%3==0)row = (pInput/3)-1;
                     else row = (pInput/3);
                     if (pInput%3==0) column = 2;
@@ -138,15 +201,26 @@ public class TicTacToe {
                     tSpot = 0;
                     wins ++;
                     play = false;
+                    }
                 }
             }
         }
-        }
     }
+
+    /**
+     * The method getOutcome gets an outcome for the clown method.
+     */
 
     private void getOutcome(){
         outcome = (int)((Math.random()*9)+1);
     }
+
+    /**
+     * The toString method for the TicTacToe class. This method will return a String showing
+     * the users Wins and Loses in a format.
+     *
+     * @return a string in a spaced format containing the user's wins and loses.
+     */
     public String toString(){return "Wins: "+wins +"\n"+"Loses: " +loses;}
 
 
