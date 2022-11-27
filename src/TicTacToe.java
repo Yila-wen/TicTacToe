@@ -58,19 +58,18 @@ public class TicTacToe {
             if (spot(outcome)) {
                 check++;
             }
-            if (winCondition().equals(symbol)){
-                tSpot = 0;
-                loses ++;
-                play = false;
-            }
-    }
+        }
         cpuTotal += outcome;
-        tSpot--;
         if (outcome%3==0)row = (outcome/3)-1;
         else row = (outcome/3);
         if (outcome%3==0) column = 2;
         else column = (outcome%3)-1;
-    clownGrid(row,column,symbol);}
+    clownGrid(row,column,symbol);
+        if (winCondition().equals(symbol)){
+            tSpot = 0;
+            loses ++;
+            play = false;
+        }}
 
     private boolean spot ( int spotnum ) {
         int check = 0;
